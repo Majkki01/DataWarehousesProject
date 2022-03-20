@@ -5,12 +5,14 @@ import sys
 from random import randrange
 import datetime
 import codecs
+import random
 
 fake = Faker(['pl_PL'])
 fake_data = []
 
 #PEOPLE GENERATOR
 for i in range(10):
+
     x = randrange(100)
     if x < 45:
         gender = "man"
@@ -63,6 +65,37 @@ for i in range(10):
     fake_data.append([clubMember, price, iban])
 
 with codecs.open('customers.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in fake_data:
+        print(','.join(map(str,i)))
+    sys.stdout = original_stdout
+
+
+#GYM WORKERS GENERATOR
+fake_data = []
+
+for i in range(10):
+
+    salary = round(random.uniform(3000.10, 15000.00), 2)
+    randomrole = randrange(20)
+
+    trainerspec = ["cardio", "strength training", "dietetics"]
+    receptionistspec = ["accounting", "cleaning", "marketing"]
+    managerspec = ["human Resources", "finance", "PR management"]
+
+    if randomrole < 14:
+        role = "trainer"
+        specialization = trainerspec[randrange(3)]
+    elif randomrole < 18:
+        role = "receptionist"
+        specialization = receptionistspec[randrange(3)]
+    else:
+        role = "manager"
+        specialization = managerspec[randrange(3)]
+
+    fake_data.append([salary, role, specialization])
+
+with codecs.open('gymworkers.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in fake_data:
         print(','.join(map(str,i)))
