@@ -137,3 +137,20 @@ with codecs.open('sessiontopics.bulk', 'w', "utf-8") as f:
         print(','.join(map(str,i)))
     sys.stdout = original_stdout
 
+
+# TRAINING SESSIONS GENERATOR
+sessions_data = []
+
+for i in range(sessionsNo):
+
+    day = str(fake.future_date())
+
+    hour = str(random.randint(7,21))
+    minrand = randrange(2)
+    if minrand == 0:
+        minute = "00"
+    else:
+        minute = "30"
+
+    date = day + " " + hour + ":" + minute + ":00"
+    sessions_data.append([date])
