@@ -8,10 +8,18 @@ import codecs
 import random
 
 fake = Faker(['pl_PL'])
-fake_data = []
+
+peopleNo = 10
+customersNo = 10
+workersNo = 20
+sessionsNo = 10
+ReservationsNo = 10
+
 
 #PEOPLE GENERATOR
-for i in range(10):
+people_data = []
+
+for i in range(peopleNo):
 
     x = randrange(100)
     if x < 45:
@@ -31,21 +39,21 @@ for i in range(10):
         name = fake.first_name_nonbinary()
         surname = fake.last_name_nonbinary()
 
-    fake_data.append([name, surname, fake.date_between_dates(date_start='-80y', date_end='-18y'), fake.msisdn()[4:], gender])
+    people_data.append([name, surname, fake.date_between_dates(date_start='-80y', date_end='-18y'), fake.msisdn()[4:], gender])
 
 original_stdout = sys.stdout
 
 with codecs.open('people.bulk', 'w', "utf-8") as f:
     sys.stdout = f
-    for i in fake_data:
+    for i in people_data:
         print(','.join(map(str,i)))
     sys.stdout = original_stdout
 
 
 #CUSTOMERS GENERATOR
-fake_data = []
+customers_data = []
 
-for i in range(10):
+for i in range(customersNo):
 
     isClubMember = randrange(10)
     prices = [59.99, 79.99, 99.99, 119.99, 139.99]
@@ -62,19 +70,19 @@ for i in range(10):
     else:
         iban = "NULL"
 
-    fake_data.append([clubMember, price, iban])
+    customers_data.append([clubMember, price, iban])
 
 with codecs.open('customers.bulk', 'w', "utf-8") as f:
     sys.stdout = f
-    for i in fake_data:
+    for i in customers_data:
         print(','.join(map(str,i)))
     sys.stdout = original_stdout
 
 
 #GYM WORKERS GENERATOR
-fake_data = []
+workers_data = []
 
-for i in range(10):
+for i in range(workersNo):
 
     salary = round(random.uniform(3000.10, 15000.00), 2)
     randomrole = randrange(20)
@@ -93,10 +101,39 @@ for i in range(10):
         role = "manager"
         specialization = managerspec[randrange(3)]
 
-    fake_data.append([salary, role, specialization])
+    workers_data.append([salary, role, specialization])
 
 with codecs.open('gymworkers.bulk', 'w', "utf-8") as f:
     sys.stdout = f
-    for i in fake_data:
+    for i in workers_data:
         print(','.join(map(str,i)))
     sys.stdout = original_stdout
+
+
+#SESSION TOPICS GENERATOR
+topics_data = []
+
+topics_data.append(["Cardio Boost", "Individual", "Training endurance and endurance with the use of stationary gym machines"])
+topics_data.append(["Strength Boost", "Individual", "General training session focused on increasing muscle volume"])
+topics_data.append(["Mixed work-out", "Individual", "Combining strength and endurance to increase physical fitness"])
+topics_data.append(["Dietetic consultancy", "Individual", "Creating and anaylyzing nutritional plan with the best specialists + training"])
+topics_data.append(["Work-out consultancy", "Individual", "Creating and analyzing weekly training plans with the best specilists + training"])
+topics_data.append(["Beginner Boxing", "Individual", "Classes aimed at learning some basics of boxing with experienced trainer"])
+topics_data.append(["Intermediate Boxing", "Individual", "Classes aimed at improving boxing technique and increasing its effectiveness + endurance"])
+topics_data.append(["Profiled stretching", "Individual", "Classes which focues on improving posture and the degree of stretching and muscle relaxation"])
+topics_data.append(["Zumba classes", "Group", "Keeping in shape together with learning some aspects of zumba"])
+topics_data.append(["Slim thighs", "Group", "Group classes focued on increases physical effort and fat loss"])
+topics_data.append(["Aerobic", "Group", "Combining physcial and development exercises with rhytmic music"])
+topics_data.append(["Group stretching", "Group", "Stretching all body parts in group with good astosphere"])
+topics_data.append(["Group cardio", "Group", "Synchronously improve your endurance on stationary bikes and other equipment"])
+topics_data.append(["Boxing sparring", "Group", "Test your abilities and compare yourself in boxing sparrings with other participants"])
+topics_data.append(["Group barbells", "Group", "Lifting different types of weights in a form of integrating group classes"])
+topics_data.append(["Tramplolines", "Group", "Here you can lose weight quickly by jumping on trampolines (improving condition and balance"])
+topics_data.append(["Group Yoga", "Group", "Classes which teach basics of yoga with relaxation and stretching"])
+
+with codecs.open('sessiontopics.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in topics_data:
+        print(','.join(map(str,i)))
+    sys.stdout = original_stdout
+
