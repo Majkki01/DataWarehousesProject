@@ -128,7 +128,7 @@ topics_data.append(["Group stretching", "Group", "Stretching all body parts in g
 topics_data.append(["Group cardio", "Group", "Synchronously improve your endurance on stationary bikes and other equipment"])
 topics_data.append(["Boxing sparring", "Group", "Test your abilities and compare yourself in boxing sparrings with other participants"])
 topics_data.append(["Group barbells", "Group", "Lifting different types of weights in a form of integrating group classes"])
-topics_data.append(["Tramplolines", "Group", "Here you can lose weight quickly by jumping on trampolines (improving condition and balance"])
+topics_data.append(["Trampolines", "Group", "Here you can lose weight quickly by jumping on trampolines (improving condition and balance"])
 topics_data.append(["Group Yoga", "Group", "Classes which teach basics of yoga with relaxation and stretching"])
 
 with codecs.open('sessiontopics.bulk', 'w', "utf-8") as f:
@@ -143,7 +143,7 @@ sessions_data = []
 
 for i in range(sessionsNo):
 
-    day = str(fake.future_date())
+    day = str(fake.date_between_dates(date_start='-3y', date_end='+1m'))
 
     hour = str(random.randint(7,21))
     minrand = randrange(2)
@@ -154,3 +154,9 @@ for i in range(sessionsNo):
 
     date = day + " " + hour + ":" + minute + ":00"
     sessions_data.append([date])
+
+with codecs.open('trainingsessions.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in sessions_data:
+        print(','.join(map(str,i)))
+    sys.stdout = original_stdout
