@@ -15,6 +15,8 @@ workersNo = 20
 sessionsNo = 10
 ReservationsNo = 10
 
+original_stdout = sys.stdout
+
 
 #PEOPLE GENERATOR
 people_data = []
@@ -41,22 +43,15 @@ for i in range(peopleNo):
 
     people_data.append([name, surname, fake.date_between_dates(date_start='-80y', date_end='-18y'), fake.msisdn()[4:], gender])
 
-original_stdout = sys.stdout
-
-with codecs.open('people.bulk', 'w', "utf-8") as f:
-    sys.stdout = f
-    for i in people_data:
-        print(','.join(map(str,i)))
-    sys.stdout = original_stdout
-
 
 #CUSTOMERS GENERATOR
 customers_data = []
+prices = [59.99, 79.99, 99.99, 119.99, 139.99]
 
 for i in range(customersNo):
 
     isClubMember = randrange(10)
-    prices = [59.99, 79.99, 99.99, 119.99, 139.99]
+
     if isClubMember < 7:
         clubMember = 1
         price = prices[randrange(5)]
@@ -72,24 +67,17 @@ for i in range(customersNo):
 
     customers_data.append([clubMember, price, iban])
 
-with codecs.open('customers.bulk', 'w', "utf-8") as f:
-    sys.stdout = f
-    for i in customers_data:
-        print(','.join(map(str,i)))
-    sys.stdout = original_stdout
-
 
 #GYM WORKERS GENERATOR
 workers_data = []
+trainerspec = ["cardio", "strength training", "dietetics"]
+receptionistspec = ["accounting", "cleaning", "marketing"]
+managerspec = ["human Resources", "finance", "PR management"]
 
 for i in range(workersNo):
 
     salary = round(random.uniform(3000.10, 15000.00), 2)
     randomrole = randrange(20)
-
-    trainerspec = ["cardio", "strength training", "dietetics"]
-    receptionistspec = ["accounting", "cleaning", "marketing"]
-    managerspec = ["human Resources", "finance", "PR management"]
 
     if randomrole < 14:
         role = "trainer"
@@ -102,12 +90,6 @@ for i in range(workersNo):
         specialization = managerspec[randrange(3)]
 
     workers_data.append([salary, role, specialization])
-
-with codecs.open('gymworkers.bulk', 'w', "utf-8") as f:
-    sys.stdout = f
-    for i in workers_data:
-        print(','.join(map(str,i)))
-    sys.stdout = original_stdout
 
 
 #SESSION TOPICS GENERATOR
@@ -131,15 +113,11 @@ topics_data.append(["Group barbells", "Group", "Lifting different types of weigh
 topics_data.append(["Tramplolines", "Group", "Here you can lose weight quickly by jumping on trampolines (improving condition and balance"])
 topics_data.append(["Group Yoga", "Group", "Classes which teach basics of yoga with relaxation and stretching"])
 
-with codecs.open('sessiontopics.bulk', 'w', "utf-8") as f:
-    sys.stdout = f
-    for i in topics_data:
-        print(','.join(map(str,i)))
-    sys.stdout = original_stdout
-
 
 # TRAINING SESSIONS GENERATOR
 sessions_data = []
+rooms = ["A01", "A02", "A03", "A11", "A12", "B01", "B02", "B03", "B11", "B12"]
+resPrices = ["40.99", "50.99", "60.99", "70.99"]
 
 for i in range(sessionsNo):
 
@@ -153,4 +131,46 @@ for i in range(sessionsNo):
         minute = "30"
 
     date = day + " " + hour + ":" + minute + ":00"
-    sessions_data.append([date])
+
+    topic = randrange(len(topics_data))
+
+    if topics_data[topic][1] == "Individual":
+        total_slots = 1
+    else:
+        total_slots = random.randint(5,25)
+
+
+    trainer = randrange(workersNo)
+
+    while workers_data[trainer][1] != "trainer":
+        trainer = randrange(workersNo)
+
+    sessions_data.append([date, total_slots, total_slots, random.choice(rooms), random.choice(resPrices), topic + 1, trainer + 1])
+
+
+# WRITING TO FILE
+
+with codecs.open('people.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in people_data:
+        print(','.join(map(str,i)))
+
+with codecs.open('customers.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in customers_data:
+        print(','.join(map(str,i)))
+    
+with codecs.open('gymworkers.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in workers_data:
+        print(','.join(map(str,i)))
+
+with codecs.open('sessiontopics.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in topics_data:
+        print(','.join(map(str,i)))
+
+with codecs.open('sessions.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in sessions_data:
+        print(','.join(map(str,i)))
