@@ -121,7 +121,7 @@ resPrices = ["40.99", "50.99", "60.99", "70.99"]
 
 for i in range(sessionsNo):
 
-    day = str(fake.date_between_dates(date_start='-3y', date_end='+1m'))
+    day = str(fake.date_between_dates(date_start='-3y', date_end='+14d'))
 
     hour = str(random.randint(7,21))
     minrand = randrange(2)
