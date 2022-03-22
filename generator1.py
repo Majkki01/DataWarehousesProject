@@ -58,13 +58,13 @@ for i in range(customersNo):
         price = prices[randrange(5)]
     else:
         clubMember = 0
-        price = "NULL"
+        price = ""
     
     hasIBAN = randrange(10)
     if hasIBAN < 7:
         iban = fake.iban()
     else:
-        iban = "NULL"
+        iban = ""
 
     customers_data.append([clubMember, price, iban])
 
@@ -122,7 +122,7 @@ resPrices = ["40.99", "50.99", "60.99", "70.99"]
 
 for i in range(sessionsNo):
 
-    day = str(fake.date_between_dates(date_start='-3y', date_end='+14d'))
+    day = str(fake.date_between_dates(date_start='-1y', date_end='+14d'))
 
     hour = str(random.randint(7,21))
     minrand = randrange(2)
@@ -153,17 +153,21 @@ for i in range(sessionsNo):
 reservations_data = []
 
 for i in range(ReservationsNo):
+    if i < customersNo:
+        customer = i
+    else:
+        customer = randrange(customersNo)
 
     session = randrange(sessionsNo)
 
     while sessions_data[session][2] == 0:
         session = randrange(sessionsNo)
 
-    print(sessions_data[session][0])
-
     session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
 
-    reservation_date = fake.date_time_between_dates(datetime_start = session_date - timedelta(days=31), datetime_end = session_date)
+    max_reservation_date = min(session_date, datetime.now())
+
+    reservation_date = fake.date_time_between_dates(datetime_start = session_date - timedelta(days=31), datetime_end = max_reservation_date)
 
     sessions_data[session][2] = sessions_data[session][2] - 1
     
@@ -172,14 +176,8 @@ for i in range(ReservationsNo):
     else:
         discount = 0
 
-    
-    if i < customersNo:
-        customer = i
-    else:
-        customer = randrange(customersNo)
-    
     reservation_type_rand = randrange(10)
-    if(reservation_type_rand > 6 and customers_data[customer][2] != "NULL"):
+    if(reservation_type_rand > 6 and customers_data[customer][2] != ""):
         reservation_type = "online"
     else:
         reservation_type = "offline"
@@ -188,37 +186,73 @@ for i in range(ReservationsNo):
     while workers_data[receptionist][1] != "receptionist":
         receptionist = randrange(workersNo)
 
-    reservations_data.append([reservation_date, discount, reservation_type, customer+workersNo+1, receptionist+1, session+1])
+    reservations_data.append([reservation_date, discount, reservation_type, customer+workersNo+1, receptionist+1, session+1, i+1])
 
+# BILLS GENERATOR
+bills_data = []
+
+for i in range(ReservationsNo):
+
+    value = round(float(sessions_data[reservations_data[i][5]-1][4]) - reservations_data[i][1],2)
+    
+    due_date = reservations_data[i][0] + timedelta(days=7)
+    
+    is_paid_rand = randrange(10)
+    if is_paid_rand < 8:
+        is_paid = 1
+    else:
+        is_paid = 0
+
+    max_date = min(due_date, datetime.now())
+
+    if is_paid:
+        date_of_payment = fake.date_time_between_dates(datetime_start = reservations_data[i][0], datetime_end = max_date)
+    else:
+        date_of_payment = ""
+
+    if reservations_data[i][2] == "online":
+        payment_method = "online"
+    else:
+        if randrange(2) < 1:
+            payment_method = "cash"
+        else:
+            payment_method = "card"
+
+    bills_data.append([value, due_date, is_paid, date_of_payment, payment_method, reservations_data[i][3]])
 
 # WRITING TO FILE
 
 with codecs.open('people.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in people_data:
-        print(','.join(map(str,i)))
+        print(',' + ','.join(map(str,i)))
 
 with codecs.open('customers.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in customers_data:
-        print(','.join(map(str,i)))
+        print(',' + ','.join(map(str,i)))
     
 with codecs.open('gymworkers.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in workers_data:
-        print(','.join(map(str,i)))
+        print(',' + ','.join(map(str,i)))
 
 with codecs.open('sessiontopics.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in topics_data:
-        print(','.join(map(str,i)))
+        print(',' + ','.join(map(str,i)))
 
 with codecs.open('sessions.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in sessions_data:
-        print(','.join(map(str,i)))
+        print(',' + ','.join(map(str,i)))
 
 with codecs.open('reservations.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in reservations_data:
-        print(','.join(map(str,i)))
+        print(',' + ','.join(map(str,i)))
+
+with codecs.open('bills.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in bills_data:
+        print(',' + ','.join(map(str,i)))
