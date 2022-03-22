@@ -6,6 +6,7 @@ from random import randrange
 import datetime
 import codecs
 import random
+from datetime import datetime, timedelta
 
 fake = Faker(['pl_PL'])
 
@@ -13,8 +14,8 @@ peopleNo = 10
 customersNo = 10
 workersNo = 20
 sessionsNo = 10
-ReservationsNo = 10
-
+ReservationsNo = 20
+BillsNo = 10
 original_stdout = sys.stdout
 
 
@@ -148,6 +149,48 @@ for i in range(sessionsNo):
     sessions_data.append([date, total_slots, total_slots, random.choice(rooms), random.choice(resPrices), topic + 1, trainer + 1])
 
 
+# RESERVATIONS GENERATOR
+reservations_data = []
+
+for i in range(ReservationsNo):
+
+    session = randrange(sessionsNo)
+
+    while sessions_data[session][2] == 0:
+        session = randrange(sessionsNo)
+
+    print(sessions_data[session][0])
+
+    session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
+
+    reservation_date = fake.date_time_between_dates(datetime_start = session_date - timedelta(days=31), datetime_end = session_date)
+
+    sessions_data[session][2] = sessions_data[session][2] - 1
+    
+    if session_date - reservation_date >= timedelta(days=14):
+        discount = round(0.15 * float(sessions_data[session][4]),2)
+    else:
+        discount = 0
+
+    
+    if i < customersNo:
+        customer = i
+    else:
+        customer = randrange(customersNo)
+    
+    reservation_type_rand = randrange(10)
+    if(reservation_type_rand > 6 and customers_data[customer][2] != "NULL"):
+        reservation_type = "online"
+    else:
+        reservation_type = "offline"
+
+    receptionist = randrange(workersNo)
+    while workers_data[receptionist][1] != "receptionist":
+        receptionist = randrange(workersNo)
+
+    reservations_data.append([reservation_date, discount, reservation_type, customer+workersNo+1, receptionist+1, session+1])
+
+
 # WRITING TO FILE
 
 with codecs.open('people.bulk', 'w', "utf-8") as f:
@@ -173,4 +216,9 @@ with codecs.open('sessiontopics.bulk', 'w', "utf-8") as f:
 with codecs.open('sessions.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in sessions_data:
+        print(','.join(map(str,i)))
+
+with codecs.open('reservations.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in reservations_data:
         print(','.join(map(str,i)))
