@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+from calendar import calendar
 from multiprocessing import managers
 from faker import Faker
 import sys
@@ -7,16 +8,30 @@ import datetime
 import codecs
 import random
 from datetime import datetime, timedelta
+import time
+import numpy as np
+from bisect import bisect_left
+import bisect
+
+start = time.time()
 
 fake = Faker(['pl_PL'])
 
-peopleNo = 10
-customersNo = 10
+peopleNo = 50
+customersNo = 30
 workersNo = 20
-sessionsNo = 10
-ReservationsNo = 20
-BillsNo = 10
+sessionsNo = 100
+ReservationsNo = 200
+BillsNo = 200
+surveysNo = 10
 original_stdout = sys.stdout
+
+def BinSearch(a, x):
+        i = bisect_left(a, x)
+        if i != len(a) and a[i] == x:
+            return i
+        else:
+            return -1
 
 
 #PEOPLE GENERATOR
@@ -119,6 +134,9 @@ topics_data.append(["Group Yoga", "Group", "Classes which teach basics of yoga w
 sessions_data = []
 rooms = ["A01", "A02", "A03", "A11", "A12", "B01", "B02", "B03", "B11", "B12"]
 resPrices = ["40.99", "50.99", "60.99", "70.99"]
+trainers_calendar = []
+for _ in range(20):
+    trainers_calendar.append([])
 
 for i in range(sessionsNo):
 
@@ -146,6 +164,15 @@ for i in range(sessionsNo):
     while workers_data[trainer][1] != "trainer":
         trainer = randrange(workersNo)
 
+    while BinSearch(trainers_calendar[trainer], datetime.strptime(date, '%Y-%m-%d %H:%M:%S')) != -1:
+        trainer = randrange(workersNo)
+        
+        while workers_data[trainer][1] != "trainer":
+            trainer = randrange(workersNo)
+    
+    bisect.insort(trainers_calendar[trainer], datetime.strptime(date, '%Y-%m-%d %H:%M:%S'))
+
+
     sessions_data.append([date, total_slots, total_slots, random.choice(rooms), random.choice(resPrices), topic + 1, trainer + 1])
 
 
@@ -168,6 +195,11 @@ for i in range(ReservationsNo):
     max_reservation_date = min(session_date, datetime.now())
 
     reservation_date = fake.date_time_between_dates(datetime_start = session_date - timedelta(days=31), datetime_end = max_reservation_date)
+
+    d1 = reservation_date.time()
+    
+    if d1.hour >= 0 and d1.hour < 7:
+       reservation_date = reservation_date - timedelta(hours=7)
 
     sessions_data[session][2] = sessions_data[session][2] - 1
     
@@ -220,6 +252,32 @@ for i in range(ReservationsNo):
 
     bills_data.append([value, due_date, is_paid, date_of_payment, payment_method, reservations_data[i][3]])
 
+# SURVEYS GENERATOR
+surveys_data = []
+
+for i in range(surveysNo):
+
+    session = randrange(sessionsNo)
+    session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
+    
+    while session_date >= (datetime.now() - timedelta(hours=2)):
+         session = randrange(sessionsNo)
+         session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
+
+    survey_date = fake.date_time_between_dates(datetime_start = session_date + timedelta(hours=1), datetime_end = session_date + timedelta(hours=2))
+
+    session_topic = topics_data[sessions_data[session][5]-1][0]
+
+    trainer_name = people_data[sessions_data[session][6]-1][0]
+    trainer_surname = people_data[sessions_data[session][6]-1][1]
+    trainer = trainer_name + " " + trainer_surname
+
+    scores = []
+    for i in range(4):
+        scores.append(randrange(5) + 1)
+
+    surveys_data.append([survey_date, session_topic, trainer, scores[0], scores[1], scores[2], scores[3]])
+
 # WRITING TO FILE
 
 with codecs.open('people.bulk', 'w', "utf-8") as f:
@@ -256,3 +314,12 @@ with codecs.open('bills.bulk', 'w', "utf-8") as f:
     sys.stdout = f
     for i in bills_data:
         print(',' + ','.join(map(str,i)))
+
+with codecs.open('surveys.bulk', 'w', "utf-8") as f:
+    sys.stdout = f
+    for i in surveys_data:
+        print(','.join(map(str,i)))
+
+sys.stdout = original_stdout
+end = time.time()
+print(end - start)
