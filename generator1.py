@@ -17,13 +17,17 @@ start = time.time()
 
 fake = Faker(['pl_PL'])
 
-peopleNo = 10000
-customersNo = 9980
+peopleNo = 5000
+customersNo = 4980
 workersNo = 20
-sessionsNo = 80000
-ReservationsNo = 160000
-surveysNo = 10
+sessionsNo = 100000
+ReservationsNo = 300000
+surveysNo = 150000
 original_stdout = sys.stdout
+start_date = datetime(2018, 1, 1, 0, 0 ,0)
+end_date = datetime(2019, 12, 31, 23, 59, 59)
+bill = 0
+
 
 def BinSearch(a, x):
         i = bisect_left(a, x)
@@ -36,76 +40,87 @@ def BinSearch(a, x):
 #PEOPLE GENERATOR
 people_data = []
 
-for i in range(peopleNo):
+def people_generator(peopleNo):
+    for _ in range(peopleNo):
+        
+        x = randrange(100)
+        if x < 45:
+            gender = "man"
+        elif x < 90:
+            gender = "woman"
+        else:
+            gender = "unknown"
 
-    x = randrange(100)
-    if x < 45:
-        gender = "man"
-    elif x < 90:
-        gender = "woman"
-    else:
-        gender = "unknown"
+        if gender == "man":
+            name = fake.first_name_male()
+            surname = fake.last_name_male()
+        elif gender == "woman":
+            name = fake.first_name_female()
+            surname = fake.last_name_female()
+        else:
+            name = fake.first_name_nonbinary()
+            surname = fake.last_name_nonbinary()
 
-    if gender == "man":
-        name = fake.first_name_male()
-        surname = fake.last_name_male()
-    elif gender == "woman":
-        name = fake.first_name_female()
-        surname = fake.last_name_female()
-    else:
-        name = fake.first_name_nonbinary()
-        surname = fake.last_name_nonbinary()
+        people_data.append([name, surname, fake.date_between_dates(date_start='-80y', date_end='-18y'), fake.msisdn()[4:], gender])
+    return 
 
-    people_data.append([name, surname, fake.date_between_dates(date_start='-80y', date_end='-18y'), fake.msisdn()[4:], gender])
-
+people_generator(peopleNo)
 
 #CUSTOMERS GENERATOR
 customers_data = []
-prices = [59.99, 79.99, 99.99, 119.99, 139.99]
+def customers_generator(customersNo):
+    prices = [59.99, 79.99, 99.99, 119.99, 139.99]
 
-for i in range(customersNo):
+    for i in range(customersNo):
 
-    isClubMember = randrange(10)
+        isClubMember = randrange(10)
 
-    if isClubMember < 7:
-        clubMember = 1
-        price = prices[randrange(5)]
-    else:
-        clubMember = 0
-        price = ""
+        if isClubMember < 7:
+            clubMember = 1
+            price = prices[randrange(5)]
+        else:
+            clubMember = 0
+            price = ""
+        
+        hasIBAN = randrange(10)
+        if hasIBAN < 7:
+            iban = fake.iban()
+        else:
+            iban = ""
+
+        customers_data.append([clubMember, price, iban])
+    return
     
-    hasIBAN = randrange(10)
-    if hasIBAN < 7:
-        iban = fake.iban()
-    else:
-        iban = ""
-
-    customers_data.append([clubMember, price, iban])
-
+customers_generator(customersNo)
 
 #GYM WORKERS GENERATOR
 workers_data = []
-trainerspec = ["cardio", "strength training", "dietetics"]
-receptionistspec = ["accounting", "cleaning", "marketing"]
-managerspec = ["human Resources", "finance", "PR management"]
 
-for i in range(workersNo):
+def workers_generator(workersNo):
 
-    salary = round(random.uniform(3000.10, 15000.00), 2)
-    randomrole = randrange(20)
+    trainerspec = ["cardio", "strength training", "dietetics"]
+    receptionistspec = ["accounting", "cleaning", "marketing"]
+    managerspec = ["human Resources", "finance", "PR management"]
 
-    if randomrole < 14:
-        role = "trainer"
-        specialization = trainerspec[randrange(3)]
-    elif randomrole < 18:
-        role = "receptionist"
-        specialization = receptionistspec[randrange(3)]
-    else:
-        role = "manager"
-        specialization = managerspec[randrange(3)]
+    for i in range(workersNo):
 
-    workers_data.append([salary, role, specialization])
+        salary = round(random.uniform(3000.10, 15000.00), 2)
+        randomrole = randrange(20)
 
+        if randomrole < 14:
+            role = "trainer"
+            specialization = trainerspec[randrange(3)]
+        elif randomrole < 18:
+            role = "receptionist"
+            specialization = receptionistspec[randrange(3)]
+        else:
+            role = "manager"
+            specialization = managerspec[randrange(3)]
+
+        workers_data.append([salary, role, specialization])
+    return
+
+workers_generator(workersNo)
 
 #SESSION TOPICS GENERATOR
 topics_data = []
@@ -131,170 +146,195 @@ topics_data.append(["Group Yoga", "Group", "Classes which teach basics of yoga w
 
 # TRAINING SESSIONS GENERATOR
 sessions_data = []
-rooms = ["A01", "A02", "A03", "A11", "A12", "B01", "B02", "B03", "B11", "B12"]
-resPrices = ["40.99", "50.99", "60.99", "70.99"]
-trainers_calendar = []
-for _ in range(20):
-    trainers_calendar.append([])
 
-for i in range(sessionsNo):
+def sessions_generator(sessionsNo, start, end):
+    rooms = ["A01", "A02", "A03", "A11", "A12", "B01", "B02", "B03", "B11", "B12"]
+    resPrices = ["40.99", "50.99", "60.99", "70.99"]
+    trainers_calendar = []
+    for _ in range(20):
+        trainers_calendar.append([])
 
-    day = str(fake.date_between_dates(date_start='-1y', date_end='+14d'))
+    for i in range(sessionsNo):
 
-    hour = str(random.randint(7,21))
-    minrand = randrange(2)
-    if minrand == 0:
-        minute = "00"
-    else:
-        minute = "30"
+        day = str(fake.date_between_dates(date_start=start, date_end=end+timedelta(weeks=2)))
 
-    date = day + " " + hour + ":" + minute + ":00"
-
-    topic = randrange(len(topics_data))
-
-    if topics_data[topic][1] == "Individual":
-        total_slots = 1
-    else:
-        total_slots = random.randint(5,25)
-
-
-    trainer = randrange(workersNo)
-
-    while workers_data[trainer][1] != "trainer":
-        trainer = randrange(workersNo)
-
-    while BinSearch(trainers_calendar[trainer], datetime.strptime(date, '%Y-%m-%d %H:%M:%S')) != -1:
-        day = str(fake.date_between_dates(date_start='-1y', date_end='+14d'))
         hour = str(random.randint(7,21))
         minrand = randrange(2)
         if minrand == 0:
             minute = "00"
         else:
             minute = "30"
+
         date = day + " " + hour + ":" + minute + ":00"
-    
-    bisect.insort(trainers_calendar[trainer], datetime.strptime(date, '%Y-%m-%d %H:%M:%S'))
+
+        topic = randrange(len(topics_data))
+
+        if topics_data[topic][1] == "Individual":
+            total_slots = 1
+        else:
+            total_slots = random.randint(5,25)
 
 
-    sessions_data.append([date, total_slots, total_slots, random.choice(rooms), random.choice(resPrices), topic + 1, trainer + 1])
+        trainer = randrange(workersNo)
 
+        while workers_data[trainer][1] != "trainer":
+            trainer = randrange(workersNo)
+
+        while BinSearch(trainers_calendar[trainer], datetime.strptime(date, '%Y-%m-%d %H:%M:%S')) != -1:
+            day = str(fake.date_between_dates(date_start=start, date_end=end))
+            hour = str(random.randint(7,21))
+            minrand = randrange(2)
+            if minrand == 0:
+                minute = "00"
+            else:
+                minute = "30"
+            date = day + " " + hour + ":" + minute + ":00"
+        
+        bisect.insort(trainers_calendar[trainer], datetime.strptime(date, '%Y-%m-%d %H:%M:%S'))
+
+
+        sessions_data.append([date, total_slots, total_slots, random.choice(rooms), random.choice(resPrices), topic + 1, trainer + 1])
+    return
+
+sessions_generator(sessionsNo, start_date, end_date)
 
 # RESERVATIONS GENERATOR
 reservations_data = []
-bill = 0
 
-for i in range(ReservationsNo):
-    if i < customersNo:
-        customer = i
-    else:
-        while customer == prev_customer:
-            customer = randrange(customersNo)
+def reservations_generator(ReservationsNo, i, now_date, old_sessionsNo, customers_no, sessions_no, old_customersNo, old_bill):
+    
+    old_i = i
+    bill = old_bill
 
-    prev_customer = customer
-
-    rand_double_reservation = randrange(10)
-
-    if i==0:
-        session = randrange(sessionsNo)
-        prev_session_slots = sessions_data[session][1] - sessions_data[session][2]
-    elif rand_double_reservation < 7 or sessions_data[session][1] - sessions_data[session][2] < 2: 
-        prev_session_slots = sessions_data[session][1] - sessions_data[session][2]
-        session = randrange(sessionsNo)
-        while sessions_data[session][2] == 0:
-            session = randrange(sessionsNo)
-
-    session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
-
-    max_reservation_date = min(session_date, datetime.now())
-
-    if rand_double_reservation < 7 or prev_session_slots < 2:
-        reservation_date = fake.date_time_between_dates(datetime_start = session_date - timedelta(days=31), datetime_end = max_reservation_date)
-        receptionist = randrange(workersNo)
-        while workers_data[receptionist][1] != "receptionist":
-            receptionist = randrange(workersNo)
-        reservation_type_rand = randrange(10)
-        if(reservation_type_rand > 6 and customers_data[customer][2] != ""):
-            reservation_type = "online"
+    while i < ReservationsNo + old_i:
+        if i < customers_no + old_i:
+            customer = (i-old_i) + old_customersNo
         else:
-            reservation_type = "offline"
+            while customer == prev_customer:
+                customer = randrange(customers_no+old_customersNo)
 
-    d1 = reservation_date.time()
-    
-    if d1.hour >= 0 and d1.hour < 7:
-       reservation_date = reservation_date - timedelta(hours=7)
+        prev_customer = customer
 
-    sessions_data[session][2] = sessions_data[session][2] - 1
-    
-    if session_date - reservation_date >= timedelta(days=14):
-        discount = round(0.15 * float(sessions_data[session][4]),2)
-    else:
-        discount = 0
+        rand_double_reservation = randrange(10)
 
-    reservations_data.append([reservation_date, discount, reservation_type, customer+workersNo+1, receptionist+1, session+1])
+        if i==old_i:
+            session = randrange(sessions_no) + old_sessionsNo
+            prev_session_slots = sessions_data[session][1] - sessions_data[session][2]
+        elif rand_double_reservation < 7 or sessions_data[session][1] - sessions_data[session][2] < 2: 
+            prev_session_slots = sessions_data[session][1] - sessions_data[session][2]
+            session = randrange(sessions_no) + old_sessionsNo
+            while sessions_data[session][2] == 0:
+                session = randrange(sessions_no) + old_sessionsNo
 
-    if i == 0 or reservations_data[i][0] != reservations_data[i-1][0]:
-        bill = bill + 1
+        session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
+
+        max_reservation_date = min(session_date, now_date)
+
+        if rand_double_reservation < 7 or prev_session_slots < 2:
+            reservation_date = fake.date_time_between_dates(datetime_start = session_date - timedelta(days=31), datetime_end = max_reservation_date)
+            receptionist = randrange(workersNo)
+            while workers_data[receptionist][1] != "receptionist":
+                receptionist = randrange(workersNo)
+            reservation_type_rand = randrange(10)
+            if(reservation_type_rand > 6 and customers_data[customer][2] != ""):
+                reservation_type = "online"
+            else:
+                reservation_type = "offline"
+
+        d1 = reservation_date.time()
         
-    reservations_data[i].append(bill)
+        if d1.hour >= 0 and d1.hour < 7:
+            reservation_date = reservation_date - timedelta(hours=7)
+
+        sessions_data[session][2] = sessions_data[session][2] - 1
+        
+        if session_date - reservation_date >= timedelta(days=14):
+            discount = round(0.15 * float(sessions_data[session][4]),2)
+        else:
+            discount = 0
+
+        reservations_data.append([reservation_date, discount, reservation_type, customer+workersNo+1, receptionist+1, session+1])
+
+        if i == old_i or reservations_data[i][0] != reservations_data[i-1][0]:
+            bill = bill + 1
+            
+        reservations_data[i].append(bill)
+        i = i + 1
+    return
+    
+reservations_generator(ReservationsNo, 0, end_date, 0, customersNo, sessionsNo, 0, 0)
 
 # BILLS GENERATOR
 bills_data = []
-value = 0
-for i in range(ReservationsNo):
 
-    value = round(value + float(sessions_data[reservations_data[i][5]-1][4]) - reservations_data[i][1],2)
-    
-    if i == ReservationsNo-1 or reservations_data[i][6] != reservations_data[i+1][6]:
-        due_date = reservations_data[i][0] + timedelta(days=7)
+def bills_generator(ReservationsNo, i, date_now):
+    value = 0
+    old_i = i
+    while i < ReservationsNo + old_i:
+
+        value = round(value + float(sessions_data[reservations_data[i][5]-1][4]) - reservations_data[i][1],2)
         
-        is_paid_rand = randrange(10)
-        if is_paid_rand < 8:
-            is_paid = 1
-        else:
-            is_paid = 0
+        if i == ReservationsNo+old_i-1 or reservations_data[i][6] != reservations_data[i+1][6]:
+            due_date = reservations_data[i][0] + timedelta(days=7)
+            
+            is_paid_rand = randrange(10)
+            if is_paid_rand < 8 or reservations_data[i][2] == "online":
+                is_paid = 1
+            else:
+                is_paid = 0
 
-        max_date = min(due_date, datetime.now())
+            max_date = min(due_date, date_now)
 
-        if is_paid:
-            date_of_payment = fake.date_time_between_dates(datetime_start = reservations_data[i][0], datetime_end = max_date)
-        else:
-            date_of_payment = ""
-
-        if reservations_data[i][2] == "online":
-            payment_method = "online"
-        else:
-            if randrange(2) < 1:
+            if is_paid:
+                date_of_payment = fake.date_time_between_dates(datetime_start = reservations_data[i][0], datetime_end = max_date)
+            else:
+                date_of_payment = ""
+            
+            if reservations_data[i][2] == "online":
+                payment_method = "online"
+            elif is_paid == 0:
+                payment_method = ""
+            elif randrange(2) < 1:
                 payment_method = "cash"
             else:
                 payment_method = "card"
 
-        bills_data.append([value, due_date, is_paid, date_of_payment, payment_method, reservations_data[i][3]])
-        value = 0
+            bills_data.append([value, due_date, is_paid, date_of_payment, payment_method, reservations_data[i][3]])
+            value = 0
+        i = i + 1
+    return
+
+bills_generator(ReservationsNo, 0, end_date)
+
 # SURVEYS GENERATOR
 surveys_data = []
 
-for i in range(surveysNo):
+def surveys_generator(surveysNo, date_now, old_sessionsNo, sessions_no):
+    for i in range(surveysNo):
 
-    session = randrange(sessionsNo)
-    session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
-    
-    while session_date >= (datetime.now() - timedelta(hours=2)):
-         session = randrange(sessionsNo)
-         session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
+        session = randrange(sessions_no) + old_sessionsNo
+        session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
+        
+        while session_date >= (date_now - timedelta(hours=2)):
+            session = randrange(sessions_no)
+            session_date = datetime.strptime(sessions_data[session][0], '%Y-%m-%d %H:%M:%S')
 
-    survey_date = fake.date_time_between_dates(datetime_start = session_date + timedelta(hours=1), datetime_end = session_date + timedelta(hours=2))
+        survey_date = fake.date_time_between_dates(datetime_start = session_date + timedelta(hours=1), datetime_end = session_date + timedelta(hours=2))
 
-    session_topic = topics_data[sessions_data[session][5]-1][0]
+        session_topic = topics_data[sessions_data[session][5]-1][0]
 
-    trainer_name = people_data[sessions_data[session][6]-1][0]
-    trainer_surname = people_data[sessions_data[session][6]-1][1]
-    trainer = trainer_name + " " + trainer_surname
+        trainer_name = people_data[sessions_data[session][6]-1][0]
+        trainer_surname = people_data[sessions_data[session][6]-1][1]
+        trainer = trainer_name + " " + trainer_surname
 
-    scores = []
-    for i in range(4):
-        scores.append(randrange(5) + 1)
+        scores = []
+        for i in range(4):
+            scores.append(randrange(5) + 1)
 
-    surveys_data.append([survey_date, session_topic, trainer, scores[0], scores[1], scores[2], scores[3]])
+        surveys_data.append([survey_date, session_topic, trainer, scores[0], scores[1], scores[2], scores[3]])
+    return
+
+surveys_generator(surveysNo, datetime.now(), 0, sessionsNo)
 
 # WRITING TO FILE
 
