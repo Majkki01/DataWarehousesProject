@@ -56,7 +56,7 @@ CREATE TABLE TrainingSessions (
 )
 
 CREATE TABLE Junk (
-    JunkID INTEGER PRIMARY KEY,
+    JunkID INTEGER IDENTITY(1,1) PRIMARY KEY,
     TrainingQuality CHAR(1),
     AverageTotalScore VARCHAR(10)
 )
@@ -124,6 +124,7 @@ ADD CONSTRAINT CheckCustomers CHECK (
 
 ALTER TABLE [Date]
 ADD CONSTRAINT CheckDate CHECK (
+    [Year] > 999 AND [Year] < 10000 AND
     [Day] > 0 AND [Day] < 32 AND
     MonthNo > 0 AND MonthNo < 13 AND
     DayWeek IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') AND
