@@ -9,3 +9,6 @@ BULK INSERT dbo.TrainingSessions FROM 'C:\Users\micha\OneDrive\Pulpit\uczelnia\s
 BULK INSERT dbo.Bills FROM 'C:\Users\micha\OneDrive\Pulpit\uczelnia\semIV\DataWarehousesProject\bills2.bulk' WITH (FIELDTERMINATOR=',', ROWTERMINATOR = '0x0A', KEEPNULLS)
 BULK INSERT dbo.Reservations FROM 'C:\Users\micha\OneDrive\Pulpit\uczelnia\semIV\DataWarehousesProject\reservations2.bulk' WITH (FIELDTERMINATOR=',', ROWTERMINATOR = '0x0A', KEEPNULLS)
 
+USE Auxiliary
+BULK INSERT dbo.AfterSessionSurveys FROM 'C:\Users\micha\OneDrive\Pulpit\uczelnia\semIV\DataWarehousesProject\surveys2.bulk' WITH (FIELDTERMINATOR=',', ROWTERMINATOR = '0x0A', KEEPNULLS)
+GO

@@ -1,0 +1,620 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="bad79322-ae20-4532-9ecc-1105d1ce5541" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Training Sessions</ID>
+  <Name>Training Sessions</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="20" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="309" scrolltop="-5034" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="9975" y="15399" backcolor="2434342" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01ee0000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="TrainingSessions" left="3664" top="1924" logicalid="6" controlid="1" masterid="0" hint1="0" hint2="0" width="3493" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000a50d000043110000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_TrainingSessions" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Date" left="6726" top="-4028" logicalid="12" controlid="7" masterid="0" hint1="0" hint2="0" width="3000" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000b80b000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_Date" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="5660" top="273" logicalid="13" controlid="8" masterid="0" hint1="0" hint2="0" width="1366" height="1951" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="0" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK__TrainingS__DateO__5BAD9CC8]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="7" destid="1" sourceattachpoint="26" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="6726" y="672" />
+              <point x="5960" y="672" />
+              <point x="5960" y="1924" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Time" left="5974" top="6785" logicalid="14" controlid="9" masterid="0" hint1="0" hint2="0" width="3000" height="2725" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000b80b0000a50a0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_Time" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="6857" top="5483" logicalid="15" controlid="10" masterid="0" hint1="0" hint2="0" width="1637" height="1802" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="0" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK__TrainingS__TimeO__5CA1C101]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="9" destid="1" sourceattachpoint="6" destattachpoint="23" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="8024" y="6785" />
+              <point x="8024" y="6385" />
+              <point x="8194" y="6385" />
+              <point x="8194" y="5783" />
+              <point x="7157" y="5783" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="SessionTopics" left="418" top="6615" logicalid="16" controlid="11" masterid="0" hint1="0" hint2="0" width="3000" height="2302" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000b80b0000fe080000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_SessionTopics" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="2069" top="4383" logicalid="17" controlid="12" masterid="0" hint1="0" hint2="0" width="1895" height="2732" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="0" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK__TrainingS__Topic__5D95E53A]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="11" destid="1" sourceattachpoint="6" destattachpoint="18" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="2468" y="6615" />
+              <point x="2468" y="4683" />
+              <point x="3664" y="4683" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="GymWorkers" left="894" top="-2204" logicalid="18" controlid="13" masterid="0" hint1="0" hint2="0" width="3043" height="3572" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000e30b0000f40d0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GymWorkers" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="3637" top="-267" logicalid="19" controlid="14" masterid="0" hint1="0" hint2="0" width="973" height="2491" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="0" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[FK__TrainingS__GymWo__5E8A0973]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="13" destid="1" sourceattachpoint="19" destattachpoint="0" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="3937" y="132" />
+              <point x="4310" y="132" />
+              <point x="4310" y="1924" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>309</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-5034</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>418</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>-4028</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="163">
+            <Shape Id="Training Session ID" Expanded="true">
+              <Attributes>
+                <Attribute Id="Training Session ID" />
+                <Attribute Id="Date Of Session ID" />
+                <Attribute Id="Gym Worker ID" />
+                <Attribute Id="Time Of Session ID" />
+                <Attribute Id="Topic ID" />
+                <Attribute Id="Name" />
+                <Attribute Id="Type" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="52e1b6ea-6136-4294-8e04-4b2b7e68bfdf">
+    <DataSourceViewID>Gym DW</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="679557b1-c320-4d2e-a4be-b1b0f725e498">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="d9a75a7f-fb15-4d74-9c1b-f4a9f68c7d35">
+      <ID>Training Session ID</ID>
+      <Name>Training Session ID</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="53ee66c4-2f60-4d82-bdfe-762b7c064c26">
+          <DataType>Integer</DataType>
+          <NullProcessing>UnknownMember</NullProcessing>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="dd5ce514-2999-4e45-8dad-344d4d6a6724">
+            <TableID>dbo_TrainingSessions</TableID>
+            <ColumnID>TrainingSessionID</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="add4f3b3-cd05-482b-b7dc-30403811dd7f">
+          <AttributeID>Year</AttributeID>
+          <Name>Res session Year</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1f2d9895-9268-45db-9a39-ba38b008410f">
+          <AttributeID>Month No</AttributeID>
+          <Name>Res session Month No</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="fdcdf741-d32c-4d87-a517-cf693d7ba7df">
+          <AttributeID>Day</AttributeID>
+          <Name>Res session Day</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="65a1fe88-2691-43ac-8ca8-0aaf95e63093">
+          <AttributeID>Day Week</AttributeID>
+          <Name>Res session Day Week</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="fc2d65ef-c305-4ecf-83de-461a58c3db03">
+          <AttributeID>Season</AttributeID>
+          <Name>Res session Season</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="7ff8ea9c-83aa-417a-8540-904d3040ad77">
+          <AttributeID>Holiday</AttributeID>
+          <Name>Res session Holiday</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="2b80b01d-f0fc-46cc-a685-364557891a98">
+          <AttributeID>Month Name</AttributeID>
+          <Name>Res session Month Name</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="56b0ac33-32fe-46cf-a7d6-732f5fe1c4b2">
+          <AttributeID>Week No</AttributeID>
+          <Name>Res session Week No</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a6aab789-6eec-4bfc-8813-82bb982e5790">
+          <AttributeID>Day Week No</AttributeID>
+          <Name>Res session Day Week No</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="6ff4b87b-a04d-4658-a84e-d22a5a3384d3">
+          <AttributeID>Hour</AttributeID>
+          <Name>Res session Hour</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="56a7421b-c1ae-48c7-999a-d362ae2f4a9d">
+          <AttributeID>Minute</AttributeID>
+          <Name>Res session Minute</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="3a5ce6b6-8497-4e41-bb38-088038380644">
+          <AttributeID>Time Of Day</AttributeID>
+          <Name>Res session Time Of Day</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="049e1e0a-fe05-47a5-a16d-033979202160">
+          <AttributeID>Type</AttributeID>
+          <Name>Res session Type</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="beb125b7-2e4a-40d8-92ce-f06335e54a93">
+          <AttributeID>Name</AttributeID>
+          <Name>Name_</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="58955dba-e30e-4e30-95ac-e8102818bce3">
+          <AttributeID>Salary Cat</AttributeID>
+          <Name>Res session Salary Cat</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="aed6777c-0a75-4704-b3e5-cdfe22a9f380">
+          <AttributeID>Role</AttributeID>
+          <Name>Res session Role</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="b9068dd4-f36e-4675-a9aa-d0a8086e4798">
+          <AttributeID>Specialization</AttributeID>
+          <Name>Res session Specialization</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="8d9bba80-13e8-4be4-b096-220ebad3cf71">
+          <AttributeID>Name Surname</AttributeID>
+          <Name>Res session Name Surname</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="9e37388c-a2d8-40f4-a43b-0fb6c9c184b6">
+          <AttributeID>Gender</AttributeID>
+          <Name>Res session Gender</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="8c72bd21-4cd5-4f35-8616-f9c954ed04be">
+      <ID>Year</ID>
+      <Name>Res session Year</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c5b64d08-51b0-4f38-a5ef-8beb36699e20">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3fd15361-454e-48d1-bdfd-c199a2f3854c">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>Year</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="29b9a6cd-2f8f-44ba-a2d5-c813338f910a">
+      <ID>Month No</ID>
+      <Name>Res session Month No</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="f583ece3-a316-46e9-9548-350a7b147bfa">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e1bca118-05fe-4c46-b9ce-82b824eac834">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>MonthNo</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="549d3ae4-356b-4d86-b2f8-016f078227a6">
+      <ID>Day</ID>
+      <Name>Res session Day</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="6a69e3c7-4f42-4279-906a-8cbc27d8dd4d">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ea69a475-7727-40cc-81c9-b2b188a7441f">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>Day</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="440be058-67a9-4744-a22a-90206f46a1c8">
+      <ID>Day Week</ID>
+      <Name>Res session Day Week</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a5d24fdc-0206-44e3-b12a-685929718b79">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="97a1c69c-37b5-4f12-8bc2-f21fe4224d9f">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>DayWeek</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="459e985f-0548-4c3a-825f-e6f7706576fc">
+      <ID>Season</ID>
+      <Name>Res session Season</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="b7f25cd9-237f-431b-9605-5371c101ad22">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2f53f51a-82f2-427e-9c64-49eeca873a7d">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>Season</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="78119322-ebe7-41dc-a296-66e5a3a50776">
+      <ID>Holiday</ID>
+      <Name>Res session Holiday</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="6e0aa901-aae3-436e-911f-aa6d27ec311d">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c0f72825-8086-4a25-a8a9-2d9c0fc481e0">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>Holiday</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="b8313fe5-be2f-46f3-8b30-ae445680899f">
+      <ID>Month Name</ID>
+      <Name>Res session Month Name</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="3bb51089-492c-41e0-bd55-eb80aeed0314">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e6ec61cf-2094-4e9b-9cee-ad34c2dd33a8">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>MonthName</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="283705cd-22cb-47ad-9633-bdf63fb0ad2c">
+      <ID>Week No</ID>
+      <Name>Res session Week No</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="9943a44f-35d0-4439-aaab-d5aba4c6a4dd">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2255eae4-98ad-45a6-b6ca-144f664fea55">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>WeekNo</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="353a59b8-57f4-41a5-806b-5eb39475235a">
+      <ID>Day Week No</ID>
+      <Name>Res session Day Week No</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="dbc5afe0-48d5-41bd-af83-8f3da97cced6">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="361ea8c5-a6bb-438e-a7f8-c4ccd87cbef2">
+            <TableID>dbo_Date</TableID>
+            <ColumnID>DayWeekNo</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="b2a01b0c-5527-46c6-bdf1-e5d7ff6f23c8">
+      <ID>Hour</ID>
+      <Name>Res session Hour</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="93f36ad1-9600-4ae6-b6b3-7e3ba7f8c16a">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="c41076ae-9a64-4100-a93a-1e8365148e52">
+            <TableID>dbo_Time</TableID>
+            <ColumnID>Hour</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="38021c53-cd45-4fe0-b77a-c0d75a24e8db">
+      <ID>Minute</ID>
+      <Name>Res session Minute</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0c4c6de7-27f3-4568-9a20-e5ba24fde7ed">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5c935d13-7d20-41b8-9179-5e92a696a36d">
+            <TableID>dbo_Time</TableID>
+            <ColumnID>Minute</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="b33d095a-d1f5-4f2a-acba-7c8a1b71bfe1">
+      <ID>Time Of Day</ID>
+      <Name>Res session Time Of Day</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d536a71d-2459-44ed-9480-79f29ebfd8b1">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="235efc55-a020-49ce-bffb-5144c356f2b6">
+            <TableID>dbo_Time</TableID>
+            <ColumnID>TimeOfDay</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="b53d7816-cf70-419c-af30-7a624b99e7f0">
+      <ID>Type</ID>
+      <Name>Res session Type</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c3c1b1a6-808b-45e8-93e8-1e13f6cd3ee3">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="652d6643-30d6-4cc4-803c-91d3072ff03c">
+            <TableID>dbo_SessionTopics</TableID>
+            <ColumnID>Type</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="e3f09a7a-ec34-4caa-b835-bea953df5980">
+      <ID>Name</ID>
+      <Name>Res session Name</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0d6e8bc4-3917-49b5-b62a-f4474a87f359">
+          <DataType>WChar</DataType>
+          <DataSize>30</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="7f76f19d-5133-4d0c-88cd-08a4a8bbd6bf">
+            <TableID>dbo_SessionTopics</TableID>
+            <ColumnID>Name</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="4c90397f-81bd-4843-8b20-d4005389315b">
+      <ID>Salary Cat</ID>
+      <Name>Res session Salary Cat</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="55edfe44-1f33-482c-aaa9-2301ef4dfca8">
+          <DataType>WChar</DataType>
+          <DataSize>20</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f3f2b84e-6019-498d-ae11-bf20cd7a84e5">
+            <TableID>dbo_GymWorkers</TableID>
+            <ColumnID>SalaryCat</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="dda961f7-1401-4e07-9d4b-5bbfa0410834">
+      <ID>Role</ID>
+      <Name>Res session Role</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="56c1060d-72e6-4276-bccf-ae67180eb300">
+          <DataType>WChar</DataType>
+          <DataSize>20</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="373ae15e-bef1-49d1-8e42-2ff2caf167c3">
+            <TableID>dbo_GymWorkers</TableID>
+            <ColumnID>Role</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="6d6d32ed-568a-402c-ad7b-3838c18a3c3b">
+      <ID>Specialization</ID>
+      <Name>Res session Specialization</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="379b4fc1-a6c4-4159-8e69-4fabdb204ce2">
+          <DataType>WChar</DataType>
+          <DataSize>20</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="eafe7045-9928-4e96-84d9-7eb7402b3a47">
+            <TableID>dbo_GymWorkers</TableID>
+            <ColumnID>Specialization</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ed4596a1-b92b-4006-98c7-c1a4aaa02144">
+      <ID>Name Surname</ID>
+      <Name>Res session Name Surname</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="918d0b7f-35b3-445a-9f1c-d14452794a93">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4435e3fb-4479-434d-806c-90168e073b84">
+            <TableID>dbo_GymWorkers</TableID>
+            <ColumnID>NameSurname</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="7ea14d9f-8f1a-4abd-9be4-20f2d1ac60f2">
+      <ID>Gender</ID>
+      <Name>Res session Gender</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="dbf733d1-3f8d-4f6c-bcaf-ea2aca2b020c">
+          <DataType>WChar</DataType>
+          <DataSize>7</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="4471958b-756b-4159-b185-5bd3085acc13">
+            <TableID>dbo_GymWorkers</TableID>
+            <ColumnID>Gender</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

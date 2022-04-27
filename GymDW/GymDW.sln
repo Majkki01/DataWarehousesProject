@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "GymDW", "GymDW.dwproj", "{BBFD42E7-3966-487B-9EBF-7B53659D5BFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBFD42E7-3966-487B-9EBF-7B53659D5BFF}.Development|Default.ActiveCfg = Development
+		{BBFD42E7-3966-487B-9EBF-7B53659D5BFF}.Development|Default.Build.0 = Development
+		{BBFD42E7-3966-487B-9EBF-7B53659D5BFF}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDDDC770-44AF-479E-923B-0E9D8E361607}
+	EndGlobalSection
+EndGlobal

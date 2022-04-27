@@ -12,17 +12,18 @@ import time
 import numpy as np
 from bisect import bisect_left
 import bisect
+import uuid
 
 start = time.time()
 
 fake = Faker(['pl_PL'])
 
-peopleNo = 5000
-customersNo = 4980
+peopleNo = 50
+customersNo = 30
 workersNo = 20
-sessionsNo = 100000
-ReservationsNo = 300000
-surveysNo = 150000
+sessionsNo = 100
+ReservationsNo = 200
+surveysNo = 100
 original_stdout = sys.stdout
 start_date = datetime(2018, 1, 1, 0, 0 ,0)
 end_date = datetime(2019, 12, 31, 23, 59, 59)
@@ -61,15 +62,18 @@ def people_generator(peopleNo):
             name = fake.first_name_nonbinary()
             surname = fake.last_name_nonbinary()
 
-        people_data.append([name, surname, fake.date_between_dates(date_start='-80y', date_end='-18y'), fake.msisdn()[4:], gender])
+        pesel = fake.pesel()
+
+        people_data.append([name, surname, fake.date_between_dates(date_start='-80y', date_end='-18y'), fake.msisdn()[4:], gender, pesel])
     return 
 
 people_generator(peopleNo)
 
 #CUSTOMERS GENERATOR
 customers_data = []
+prices = [59.99, 79.99, 99.99, 119.99, 139.99]
+
 def customers_generator(customersNo):
-    prices = [59.99, 79.99, 99.99, 119.99, 139.99]
 
     for i in range(customersNo):
 
@@ -88,7 +92,9 @@ def customers_generator(customersNo):
         else:
             iban = ""
 
-        customers_data.append([clubMember, price, iban])
+        customerID = uuid.uuid4()
+
+        customers_data.append([clubMember, price, iban, customerID])
     return
     
 customers_generator(customersNo)
@@ -96,11 +102,11 @@ customers_generator(customersNo)
 #GYM WORKERS GENERATOR
 workers_data = []
 
-def workers_generator(workersNo):
+trainerspec = ["cardio", "strength training", "dietetics"]
+receptionistspec = ["accounting", "cleaning", "marketing"]
+managerspec = ["human Resources", "finance", "PR management"]
 
-    trainerspec = ["cardio", "strength training", "dietetics"]
-    receptionistspec = ["accounting", "cleaning", "marketing"]
-    managerspec = ["human Resources", "finance", "PR management"]
+def workers_generator(workersNo):
 
     for i in range(workersNo):
 
@@ -156,7 +162,7 @@ def sessions_generator(sessionsNo, start, end):
 
     for i in range(sessionsNo):
 
-        day = str(fake.date_between_dates(date_start=start, date_end=end+timedelta(weeks=2)))
+        day = str(fake.date_between_dates(date_start=start+timedelta(days=31), date_end=end+timedelta(weeks=2)))
 
         hour = str(random.randint(7,21))
         minrand = randrange(2)
@@ -246,14 +252,14 @@ def reservations_generator(ReservationsNo, i, now_date, old_sessionsNo, customer
         if d1.hour >= 0 and d1.hour < 7:
             reservation_date = reservation_date - timedelta(hours=7)
 
-        sessions_data[session][2] = sessions_data[session][2] - 1
+        sessions_data[session][2] = max(sessions_data[session][2] - 1, 0)
         
         if session_date - reservation_date >= timedelta(days=14):
             discount = round(0.15 * float(sessions_data[session][4]),2)
         else:
             discount = 0
 
-        reservations_data.append([reservation_date, discount, reservation_type, customer+workersNo+1, receptionist+1, session+1])
+        reservations_data.append([reservation_date, discount, reservation_type, customer+workersNo+1, receptionist+1, session+1, uuid.uuid4()])
 
         if i == old_i or reservations_data[i][0] != reservations_data[i-1][0]:
             bill = bill + 1
@@ -308,8 +314,12 @@ bills_generator(ReservationsNo, 0, end_date)
 
 # SURVEYS GENERATOR
 surveys_data = []
+reservations = []
 
-def surveys_generator(surveysNo, date_now, old_sessionsNo, sessions_no):
+def surveys_generator(surveysNo, date_now, old_sessionsNo, sessions_no, old_reservations_no):
+    reservations_subset = reservations_data[old_reservations_no:]
+    reservations = random.sample(reservations_subset, surveysNo)
+ 
     for i in range(surveysNo):
 
         session = randrange(sessions_no) + old_sessionsNo
@@ -328,13 +338,14 @@ def surveys_generator(surveysNo, date_now, old_sessionsNo, sessions_no):
         trainer = trainer_name + " " + trainer_surname
 
         scores = []
-        for i in range(4):
+        for j in range(4):
             scores.append(randrange(5) + 1)
-
-        surveys_data.append([survey_date, session_topic, trainer, scores[0], scores[1], scores[2], scores[3]])
+    
+        
+        surveys_data.append([survey_date, session_topic, trainer, scores[0], scores[1], scores[2], scores[3], reservations[i][6]])
     return
 
-surveys_generator(surveysNo, datetime.now(), 0, sessionsNo)
+surveys_generator(surveysNo, datetime.now(), 0, sessionsNo, 0)
 
 # WRITING TO FILE
 

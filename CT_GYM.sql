@@ -6,14 +6,16 @@ CREATE TABLE People (
 	Surname varchar(20),
 	DateOfBirth DATE,
 	PhoneNumber varchar(9),
-	Gender varchar(7)
+	Gender varchar(7),
+	PESEL char(11)
 )
 
 CREATE TABLE Customers (
 	ID INTEGER IDENTITY(21,1) REFERENCES People PRIMARY KEY,
 	IsClubMember BIT,
 	PassPrice DECIMAL(5,2),
-	IBAN varchar(28)
+	IBAN varchar(28),
+	CustomerNo char(36)
 )
 
 CREATE TABLE GymWorkers (
@@ -59,5 +61,6 @@ CREATE TABLE Reservations (
 	CustomerID INTEGER REFERENCES Customers,
 	ReceptionistID INTEGER REFERENCES GymWorkers,
 	SessionID INTEGER REFERENCES TrainingSessions,
+	ReservationNo char(36),
 	BillID INTEGER REFERENCES Bills
 )
